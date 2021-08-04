@@ -10,4 +10,8 @@ public class ErrorMessages {
     public static final String TUTOR_CODE_REQUIRED = "O código do tutor é obrigatório";
     public static final String TUTOR_NOT_FOUND = "Tutor não encontrado";
 
+    public static final String ANIMAL_REQUIRED = "O animal é obrigatório";
+    public static final String ANIMAL_CODE_REQUIRED = "O código do animal é obrigatório";
+    public static final String ANIMAL_NOT_FOUND = "Animal não encontrado";
+
 }

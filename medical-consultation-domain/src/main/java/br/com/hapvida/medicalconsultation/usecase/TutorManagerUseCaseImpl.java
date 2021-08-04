@@ -21,7 +21,7 @@ public class TutorManagerUseCaseImpl implements TutorManagerUseCase {
     @Override
     public Tutor get(Integer code) {
         if (isNull(code)) {
-            throw new BusinessException(ErrorMessages.VETERINARY_CODE_REQUIRED);
+            throw new BusinessException(ErrorMessages.TUTOR_CODE_REQUIRED);
         }
         return this.persistence.get(code);
     }
@@ -44,7 +44,7 @@ public class TutorManagerUseCaseImpl implements TutorManagerUseCase {
     @Override
     public Tutor save(Tutor tutor) {
         if (isNull(tutor)) {
-            throw new BusinessException(ErrorMessages.VETERINARY_REQUIRED);
+            throw new BusinessException(ErrorMessages.TUTOR_REQUIRED);
         }
 
         if (isNull(tutor.getIsActive())) {
@@ -57,13 +57,13 @@ public class TutorManagerUseCaseImpl implements TutorManagerUseCase {
     @Override
     public void delete(Integer code) {
         if (isNull(code)) {
-            throw new BusinessException(ErrorMessages.VETERINARY_REQUIRED);
+            throw new BusinessException(ErrorMessages.TUTOR_REQUIRED);
         }
 
         Tutor tutorFounded = this.get(code);
 
         if (isNull(tutorFounded)) {
-            throw new BusinessException(ErrorMessages.VETERINARY_NOT_FOUND);
+            throw new BusinessException(ErrorMessages.TUTOR_NOT_FOUND);
         }
 
         this.persistence.delete(tutorFounded);

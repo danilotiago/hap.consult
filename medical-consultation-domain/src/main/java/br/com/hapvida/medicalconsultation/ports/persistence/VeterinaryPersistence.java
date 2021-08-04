@@ -14,11 +14,11 @@ public interface VeterinaryPersistence {
 
     List<Veterinary> listWithTrashed();
 
-    Veterinary save(Veterinary Veterinary);
+    Veterinary save(Veterinary veterinary);
 
-    void delete(Veterinary Veterinary);
+    void delete(Veterinary veterinary);
 
-    void active(Veterinary Veterinary);
+    void active(Veterinary veterinary);
 
-    void inactive(Veterinary Veterinary);
+    void inactive(Veterinary veterinary);
 }

@@ -22,7 +22,6 @@ public class Veterinary {
     private String email;
 
     private Boolean isActive;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

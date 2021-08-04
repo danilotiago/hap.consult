@@ -1,17 +1,20 @@
 package br.com.hapvida.medicalconsultation.entity;
 
+import br.com.hapvida.medicalconsultation.enuns.SpeciesEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE tutors SET deleted_at = NOW() WHERE id = ?")
-@Entity(name = "tutors")
-public class TutorEntity {
+@SQLDelete(sql = "UPDATE animals SET deleted_at = NOW() WHERE id = ?")
+@Entity(name = "animals")
+public class AnimalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +22,16 @@ public class TutorEntity {
 
     private String name;
 
-    private String phone;
+    @Enumerated(EnumType.STRING)
+    private SpeciesEnum species;
 
-    private String email;
+    private String breed;
 
-    @ManyToOne
-    @JoinColumn(name = "animals_id")
-    private AnimalEntity animal;
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "animal")
+    private List<TutorEntity> tutors;
 
     private Boolean isActive;
     private LocalDateTime createdAt;

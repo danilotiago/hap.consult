@@ -14,11 +14,11 @@ public interface TutorPersistence {
 
     List<Tutor> listWithTrashed();
 
-    Tutor save(Tutor Tutor);
+    Tutor save(Tutor tutor);
 
-    void delete(Tutor Tutor);
+    void delete(Tutor tutor);
 
-    void active(Tutor Tutor);
+    void active(Tutor tutor);
 
-    void inactive(Tutor Tutor);
+    void inactive(Tutor tutor);
 }

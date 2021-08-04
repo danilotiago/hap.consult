@@ -14,7 +14,7 @@ public interface TutorManagerUseCase {
 
     List<Tutor> listOnlyTrashed();
 
-    Tutor save(Tutor category);
+    Tutor save(Tutor tutor);
 
     void delete(Integer code);
 }

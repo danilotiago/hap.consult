@@ -14,7 +14,7 @@ public interface VeterinaryManagerUseCase {
 
     List<Veterinary> listOnlyTrashed();
 
-    Veterinary save(Veterinary category);
+    Veterinary save(Veterinary veterinary);
 
     void delete(Integer code);
 }
