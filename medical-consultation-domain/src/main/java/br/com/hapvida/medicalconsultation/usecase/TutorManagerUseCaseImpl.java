@@ -1,10 +1,10 @@
 package br.com.hapvida.medicalconsultation.usecase;
 
-import br.com.hapvida.medicalconsultation.domain.Veterinary;
+import br.com.hapvida.medicalconsultation.domain.Tutor;
 import br.com.hapvida.medicalconsultation.exceptions.BusinessException;
 import br.com.hapvida.medicalconsultation.messages.ErrorMessages;
-import br.com.hapvida.medicalconsultation.ports.persistence.VeterinaryPersistence;
-import br.com.hapvida.medicalconsultation.ports.usecase.VeterinaryManagerUseCase;
+import br.com.hapvida.medicalconsultation.ports.persistence.TutorPersistence;
+import br.com.hapvida.medicalconsultation.ports.usecase.TutorManagerUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +13,13 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 @Component
-public class VeterinaryManagerUseCaseImpl implements VeterinaryManagerUseCase {
+public class TutorManagerUseCaseImpl implements TutorManagerUseCase {
 
     @Autowired
-    private VeterinaryPersistence persistence;
+    private TutorPersistence persistence;
 
     @Override
-    public Veterinary get(Integer code) {
+    public Tutor get(Integer code) {
         if (isNull(code)) {
             throw new BusinessException(ErrorMessages.VETERINARY_CODE_REQUIRED);
         }
@@ -27,31 +27,31 @@ public class VeterinaryManagerUseCaseImpl implements VeterinaryManagerUseCase {
     }
 
     @Override
-    public List<Veterinary> list() {
+    public List<Tutor> list() {
         return this.persistence.list();
     }
 
     @Override
-    public List<Veterinary> listWithTrashed() {
+    public List<Tutor> listWithTrashed() {
         return this.persistence.listWithTrashed();
     }
 
     @Override
-    public List<Veterinary> listOnlyTrashed() {
+    public List<Tutor> listOnlyTrashed() {
         return this.persistence.listOnlyTrashed();
     }
 
     @Override
-    public Veterinary save(Veterinary veterinary) {
-        if (isNull(veterinary)) {
+    public Tutor save(Tutor tutor) {
+        if (isNull(tutor)) {
             throw new BusinessException(ErrorMessages.VETERINARY_REQUIRED);
         }
 
-        if (isNull(veterinary.getIsActive())) {
-            veterinary.setIsActive(Boolean.TRUE);
+        if (isNull(tutor.getIsActive())) {
+            tutor.setIsActive(Boolean.TRUE);
         }
 
-        return this.persistence.save(veterinary);
+        return this.persistence.save(tutor);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class VeterinaryManagerUseCaseImpl implements VeterinaryManagerUseCase {
             throw new BusinessException(ErrorMessages.VETERINARY_REQUIRED);
         }
 
-        Veterinary veterinaryFounded = this.get(code);
+        Tutor tutorFounded = this.get(code);
 
-        if (isNull(veterinaryFounded)) {
+        if (isNull(tutorFounded)) {
             throw new BusinessException(ErrorMessages.VETERINARY_NOT_FOUND);
         }
 
-        this.persistence.delete(veterinaryFounded);
+        this.persistence.delete(tutorFounded);
     }
 }

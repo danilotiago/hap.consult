@@ -1,17 +1,14 @@
-package br.com.hapvida.medicalconsultation.errors;
+package br.com.hapvida.medicalconsultation.exceptions.errors;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class FieldAndMessageError {
+public class FieldMessageError {
 
     private String field;
-
     private String message;
 }
