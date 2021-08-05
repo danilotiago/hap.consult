@@ -36,6 +36,10 @@ br.com.hapvida.medicalconsultation.services.ScheduledServiceTest
 ## Bancos de dados
 Está configurado a utilização do banco de dados H2 caso execução da aplicação no ambiente local, para os demais ambientes foi configurado o MySql.
 
+## Documentação
+Foi adicionao o swagger para a documentação de API's: <br>
+http://localhost:8080/medical-consultation/swagger-ui/
+
 ## Execução
 Podemos executar em diferentes ambientes: LOCAL, DEV, HOMOLOG e PROD, se atentando as propriedades de banco de dados acima.
 
