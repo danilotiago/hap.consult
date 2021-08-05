@@ -28,4 +28,61 @@
 
     </dependencies>
 
+    <build>
+        <finalName>medical-consultation</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application-local.yaml</include>
+                    <include>application-dev.yaml</include>
+                    <include>application-homolog.yaml</include>
+                    <include>application-prod.yaml</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>hapvida</finalName>
+                            <classifier>medical-consultation-application</classifier>
+                            <mainClass>br.com.hapvida.medicalconsultation.MedicalConsultationApplication</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-spring-boot-application-file</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="copy application to parent target">
+                                <copy
+                                    file="target/hapvida-medical-consultation-application.jar"
+                                    toFile="../target/medical-consultation.jar" />
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

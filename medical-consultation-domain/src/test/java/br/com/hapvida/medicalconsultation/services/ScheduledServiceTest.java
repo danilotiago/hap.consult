@@ -4,16 +4,12 @@ import br.com.hapvida.medicalconsultation.domain.Animal;
 import br.com.hapvida.medicalconsultation.domain.Consult;
 import br.com.hapvida.medicalconsultation.domain.Veterinary;
 import br.com.hapvida.medicalconsultation.enuns.ConsultEnum;
-import br.com.hapvida.medicalconsultation.enuns.SpeciesEnum;
 import br.com.hapvida.medicalconsultation.exceptions.BusinessException;
 import br.com.hapvida.medicalconsultation.messages.ErrorMessages;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
