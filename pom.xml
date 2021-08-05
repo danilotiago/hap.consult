@@ -68,6 +68,13 @@
 			<version>${mysql.version}</version>
 		</dependency>
 
+		<!-- H2 DRIVER FOR INTEGRATION TESTS -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- LOMBOK -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
