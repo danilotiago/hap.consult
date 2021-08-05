@@ -5,7 +5,9 @@ import br.com.hapvida.medicalconsultation.ports.persistence.ConsultPersistence;
 import br.com.hapvida.medicalconsultation.ports.usecase.CancelConsultUseCase;
 import br.com.hapvida.medicalconsultation.services.CancelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CancelConsultUseCaseImpl implements CancelConsultUseCase {
 
     @Autowired
