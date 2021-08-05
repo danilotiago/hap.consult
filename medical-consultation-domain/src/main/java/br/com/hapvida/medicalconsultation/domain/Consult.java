@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,7 +16,7 @@ public class Consult {
 
     private Integer id;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     private ConsultEnum status;
 

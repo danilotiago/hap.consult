@@ -2,6 +2,7 @@ package br.com.hapvida.medicalconsultation.mapper;
 
 import br.com.hapvida.medicalconsultation.domain.Tutor;
 import br.com.hapvida.medicalconsultation.entity.TutorEntity;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -13,11 +14,9 @@ public interface TutorEntityMapper {
 
     TutorEntityMapper INSTANCE = Mappers.getMapper(TutorEntityMapper.class);
 
-    @Mapping(target = "animal", ignore = true)
-    Tutor from(TutorEntity data);
+    Tutor from(TutorEntity data, @Context CycleAvoidingMappingContext context);
 
-    TutorEntity from(Tutor data);
+    TutorEntity from(Tutor data, @Context CycleAvoidingMappingContext context);
 
-    @Mapping(target = "animal", ignore = true)
-    List<Tutor> from(List<TutorEntity> data);
+    List<Tutor> from(List<TutorEntity> data, @Context CycleAvoidingMappingContext context);
 }

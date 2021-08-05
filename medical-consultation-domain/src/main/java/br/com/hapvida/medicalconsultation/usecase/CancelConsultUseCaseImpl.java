@@ -21,5 +21,7 @@ public class CancelConsultUseCaseImpl implements CancelConsultUseCase {
         Consult consult = this.consultPersistence.get(consultId);
 
         this.cancelService.cancel(consult);
+
+        this.consultPersistence.cancel(consult);
     }
 }

@@ -13,6 +13,8 @@ import br.com.hapvida.medicalconsultation.services.ScheduledService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class ScheduleConsultUseCaseImpl implements ScheduleConsultUseCase {
 
@@ -29,11 +31,11 @@ public class ScheduleConsultUseCaseImpl implements ScheduleConsultUseCase {
     private ConsultPersistence consultPersistence;
 
     @Override
-    public Consult schedule(Integer animalId, Integer veterinaryId) {
+    public Consult schedule(Integer animalId, Integer veterinaryId, LocalDateTime date) {
         Animal animal = this.animalPersistence.get(animalId);
         Veterinary veterinary = this.veterinaryPersistence.get(veterinaryId);
 
-        Consult consult = this.scheduledService.scheduled(animal, veterinary);
+        Consult consult = this.scheduledService.scheduled(animal, veterinary, date);
 
         if (this.consultPersistence.existsBy(animalId, veterinaryId, consult.getDate())) {
             throw new BusinessException(ErrorMessages.CONSULT_EXISTS);

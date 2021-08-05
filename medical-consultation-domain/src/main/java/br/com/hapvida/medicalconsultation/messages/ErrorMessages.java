@@ -20,7 +20,8 @@ public class ErrorMessages {
 
     public static final String CONSULT_REQUIRED = "A consulta é obrigatória";
     public static final String CONSULT_EXISTS = "Já existe uma consulta marcada para este animal e este veterinário";
-    public static final String CANCEL_PAST_CONSULT = "Uma consulta que já passou não pode ser cancelada";
     public static final String CANCEL_TODAY_CONSULT = "Uma consulta marcada para hoje não pode ser cancelada";
+
+    public static final String DATE_REQUIRED = "A data do agendamento é obrigatório";
 
 }

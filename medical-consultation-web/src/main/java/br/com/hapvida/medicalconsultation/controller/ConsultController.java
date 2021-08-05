@@ -30,7 +30,7 @@ public class ConsultController {
 
     @PostMapping("/schedule")
     public ResponseEntity<ConsultResponseDTO> schedule(@Valid @RequestBody ScheduleRequestDTO data) {
-        Consult consult = this.scheduleConsultUseCase.schedule(data.getAnimalId(), data.getVeterinaryId());
+        Consult consult = this.scheduleConsultUseCase.schedule(data.getAnimalId(), data.getVeterinaryId(), data.getDate());
 
         ConsultResponseDTO response = ConsultMapper.INSTANCE.from(consult);
 

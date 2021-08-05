@@ -6,7 +6,7 @@ import br.com.hapvida.medicalconsultation.exceptions.BusinessException;
 import br.com.hapvida.medicalconsultation.messages.ErrorMessages;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static java.util.Objects.isNull;
 
@@ -18,11 +18,7 @@ public class CancelService {
             throw new BusinessException(ErrorMessages.CONSULT_REQUIRED);
         }
 
-        if (consult.getDate().compareTo(LocalDate.now()) < 0 ) {
-            throw new BusinessException(ErrorMessages.CANCEL_PAST_CONSULT);
-        }
-
-        if (consult.getDate().compareTo(LocalDate.now()) == 0 ) {
+        if (consult.getDate().getDayOfMonth() == LocalDateTime.now().getDayOfMonth()) {
             throw new BusinessException(ErrorMessages.CANCEL_TODAY_CONSULT);
         }
 

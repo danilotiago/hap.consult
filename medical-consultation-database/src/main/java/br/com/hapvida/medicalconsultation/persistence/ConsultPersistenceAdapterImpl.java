@@ -7,6 +7,7 @@ import br.com.hapvida.medicalconsultation.entity.ConsultEntity;
 import br.com.hapvida.medicalconsultation.entity.VeterinaryEntity;
 import br.com.hapvida.medicalconsultation.exceptions.BusinessException;
 import br.com.hapvida.medicalconsultation.mapper.ConsultEntityMapper;
+import br.com.hapvida.medicalconsultation.mapper.CycleAvoidingMappingContext;
 import br.com.hapvida.medicalconsultation.messages.ErrorMessages;
 import br.com.hapvida.medicalconsultation.ports.persistence.ConsultPersistence;
 import br.com.hapvida.medicalconsultation.repository.AnimalRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -36,14 +38,14 @@ public class ConsultPersistenceAdapterImpl implements ConsultPersistence {
         Optional<ConsultEntity> result = this.consultRepository.findById(consultId);
 
         if (result.isPresent()) {
-            return ConsultEntityMapper.INSTANCE.from(result.get());
+            return ConsultEntityMapper.INSTANCE.from(result.get(), new CycleAvoidingMappingContext());
         }
 
         throw new EntityNotFoundException("A consulta de código " + consultId + " não foi encontrada");
     }
 
     @Override
-    public Boolean existsBy(Integer animalId, Integer veterinaryId, LocalDate date) {
+    public Boolean existsBy(Integer animalId, Integer veterinaryId, LocalDateTime date) {
 
         AnimalEntity animal = this.animalRepository.getById(animalId);
 
@@ -54,15 +56,15 @@ public class ConsultPersistenceAdapterImpl implements ConsultPersistence {
 
     @Override
     public Consult schedule(Consult consult) {
-        ConsultEntity consultEntity = ConsultEntityMapper.INSTANCE.from(consult);
+        ConsultEntity consultEntity = ConsultEntityMapper.INSTANCE.from(consult, new CycleAvoidingMappingContext());
         consultEntity = this.consultRepository.save(consultEntity);
-        return ConsultEntityMapper.INSTANCE.from(consultEntity);
+        return ConsultEntityMapper.INSTANCE.from(consultEntity, new CycleAvoidingMappingContext());
     }
 
     @Override
     public Consult cancel(Consult consult) {
-        ConsultEntity consultEntity = ConsultEntityMapper.INSTANCE.from(consult);
+        ConsultEntity consultEntity = ConsultEntityMapper.INSTANCE.from(consult, new CycleAvoidingMappingContext());
         consultEntity = this.consultRepository.save(consultEntity);
-        return ConsultEntityMapper.INSTANCE.from(consultEntity);
+        return ConsultEntityMapper.INSTANCE.from(consultEntity, new CycleAvoidingMappingContext());
     }
 }

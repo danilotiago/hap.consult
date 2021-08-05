@@ -3,6 +3,7 @@ package br.com.hapvida.medicalconsultation.persistence;
 import br.com.hapvida.medicalconsultation.domain.Animal;
 import br.com.hapvida.medicalconsultation.entity.AnimalEntity;
 import br.com.hapvida.medicalconsultation.mapper.AnimalEntityMapper;
+import br.com.hapvida.medicalconsultation.mapper.CycleAvoidingMappingContext;
 import br.com.hapvida.medicalconsultation.mapper.TutorEntityMapper;
 import br.com.hapvida.medicalconsultation.ports.persistence.AnimalPersistence;
 import br.com.hapvida.medicalconsultation.repository.AnimalRepository;
@@ -23,8 +24,7 @@ public class AnimalPersistenceAdapterImpl implements AnimalPersistence {
     public Animal get(Integer id) {
         Optional<AnimalEntity> result = this.repository.findByIdAndDeletedAtNull(id);
         if (result.isPresent()) {
-            Animal animal = AnimalEntityMapper.INSTANCE.from(result.get());
-            animal.setTutors(TutorEntityMapper.INSTANCE.from(result.get().getTutors()));
+            Animal animal = AnimalEntityMapper.INSTANCE.from(result.get(), new CycleAvoidingMappingContext());
             return animal;
         }
 
@@ -34,14 +34,14 @@ public class AnimalPersistenceAdapterImpl implements AnimalPersistence {
     @Override
     public List<Animal> list() {
         List<AnimalEntity> animals = this.repository.findByDeletedAtNull();
-        return AnimalEntityMapper.INSTANCE.from(animals);
+        return AnimalEntityMapper.INSTANCE.from(animals, new CycleAvoidingMappingContext());
     }
 
     @Override
     public List<Animal> listOnlyTrashed() {
         List<AnimalEntity> animals =  this.repository.findByDeletedAtNotNull();
 
-        return AnimalEntityMapper.INSTANCE.from(animals);
+        return AnimalEntityMapper.INSTANCE.from(animals, new CycleAvoidingMappingContext());
     }
 
     @Override
@@ -54,9 +54,9 @@ public class AnimalPersistenceAdapterImpl implements AnimalPersistence {
 
     @Override
     public Animal save(Animal animal) {
-        AnimalEntity animalEntity = AnimalEntityMapper.INSTANCE.from(animal);
+        AnimalEntity animalEntity = AnimalEntityMapper.INSTANCE.from(animal, new CycleAvoidingMappingContext());
         animalEntity = this.repository.save(animalEntity);
-        return AnimalEntityMapper.INSTANCE.from(animalEntity);
+        return AnimalEntityMapper.INSTANCE.from(animalEntity, new CycleAvoidingMappingContext());
     }
 
     @Override

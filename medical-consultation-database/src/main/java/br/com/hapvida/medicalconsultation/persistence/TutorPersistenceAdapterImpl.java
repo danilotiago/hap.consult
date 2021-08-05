@@ -2,6 +2,7 @@ package br.com.hapvida.medicalconsultation.persistence;
 
 import br.com.hapvida.medicalconsultation.domain.Tutor;
 import br.com.hapvida.medicalconsultation.entity.TutorEntity;
+import br.com.hapvida.medicalconsultation.mapper.CycleAvoidingMappingContext;
 import br.com.hapvida.medicalconsultation.mapper.TutorEntityMapper;
 import br.com.hapvida.medicalconsultation.ports.persistence.TutorPersistence;
 import br.com.hapvida.medicalconsultation.repository.TutorRepository;
@@ -22,7 +23,7 @@ public class TutorPersistenceAdapterImpl implements TutorPersistence {
     public Tutor get(Integer id) {
         Optional<TutorEntity> result = this.repository.findByIdAndDeletedAtNull(id);
         if (result.isPresent()) {
-            return TutorEntityMapper.INSTANCE.from(result.get());
+            return TutorEntityMapper.INSTANCE.from(result.get(), new CycleAvoidingMappingContext());
         }
 
         throw new EntityNotFoundException("O tutor de código " + id + " não foi encontrado");
@@ -31,14 +32,14 @@ public class TutorPersistenceAdapterImpl implements TutorPersistence {
     @Override
     public List<Tutor> list() {
         List<TutorEntity> tutors = this.repository.findByDeletedAtNull();
-        return TutorEntityMapper.INSTANCE.from(tutors);
+        return TutorEntityMapper.INSTANCE.from(tutors, new CycleAvoidingMappingContext());
     }
 
     @Override
     public List<Tutor> listOnlyTrashed() {
         List<TutorEntity> tutors =  this.repository.findByDeletedAtNotNull();
 
-        return TutorEntityMapper.INSTANCE.from(tutors);
+        return TutorEntityMapper.INSTANCE.from(tutors, new CycleAvoidingMappingContext());
     }
 
     @Override
@@ -51,9 +52,9 @@ public class TutorPersistenceAdapterImpl implements TutorPersistence {
 
     @Override
     public Tutor save(Tutor tutor) {
-        TutorEntity tutorEntity = TutorEntityMapper.INSTANCE.from(tutor);
+        TutorEntity tutorEntity = TutorEntityMapper.INSTANCE.from(tutor, new CycleAvoidingMappingContext());
         tutorEntity = this.repository.save(tutorEntity);
-        return TutorEntityMapper.INSTANCE.from(tutorEntity);
+        return TutorEntityMapper.INSTANCE.from(tutorEntity, new CycleAvoidingMappingContext());
     }
 
     @Override

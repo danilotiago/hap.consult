@@ -8,14 +8,18 @@ import br.com.hapvida.medicalconsultation.exceptions.BusinessException;
 import br.com.hapvida.medicalconsultation.messages.ErrorMessages;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static java.util.Objects.isNull;
 
 @Component
 public class ScheduledService {
 
-    public Consult scheduled(Animal animal, Veterinary veterinary) {
+    public Consult scheduled(Animal animal, Veterinary veterinary, LocalDateTime date) {
+
+        if (isNull(date)) {
+            throw new BusinessException(ErrorMessages.DATE_REQUIRED);
+        }
 
         if (isNull(animal)) {
             throw new BusinessException(ErrorMessages.ANIMAL_REQUIRED);
@@ -45,7 +49,7 @@ public class ScheduledService {
         consult.setStatus(ConsultEnum.SCHEDULED);
         consult.setAnimal(animal);
         consult.setVeterinary(veterinary);
-        consult.setDate(LocalDate.now());
+        consult.setDate(date);
 
         return consult;
     }

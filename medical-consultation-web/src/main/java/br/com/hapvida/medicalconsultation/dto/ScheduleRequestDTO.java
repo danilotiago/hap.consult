@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,4 +20,8 @@ public class ScheduleRequestDTO {
     @NotNull(message = "O id do veterinário é obrigatório")
     @JsonProperty("veterinary_id")
     private Integer veterinaryId;
+
+    @NotNull(message = "A data da consulta é obrigatória")
+    @JsonProperty("date_time")
+    private LocalDateTime date;
 }

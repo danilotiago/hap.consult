@@ -6,11 +6,11 @@ import br.com.hapvida.medicalconsultation.entity.VeterinaryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Repository
 public interface ConsultRepository extends JpaRepository<ConsultEntity, Integer> {
 
-    Boolean existsConsultEntityByVeterinaryAndAnimalAndDate(VeterinaryEntity veterinary, AnimalEntity animal, LocalDate date);
+    Boolean existsConsultEntityByVeterinaryAndAnimalAndDate(VeterinaryEntity veterinary, AnimalEntity animal, LocalDateTime date);
 
 }
