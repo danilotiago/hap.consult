@@ -19,6 +19,14 @@ public class CustomExceptionHandler {
 
     private static final String VALIDATION_ERROR = "Erro de validação";
 
+    @ExceptionHandler(BusinessException.class)
+    protected ResponseEntity<Object> entityNotFoundException(BusinessException ex, WebRequest request) {
+
+        GenericError body = new GenericError(LocalDateTime.now().toString(), HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> entityNotFoundException(EntityNotFoundException ex, WebRequest request) {
 
