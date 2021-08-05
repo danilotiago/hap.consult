@@ -1,6 +1,7 @@
 package br.com.hapvida.medicalconsultation.mapper;
 
 import br.com.hapvida.medicalconsultation.domain.Animal;
+import br.com.hapvida.medicalconsultation.dto.AllAnimalResponseDTO;
 import br.com.hapvida.medicalconsultation.dto.AnimalRequestDTO;
 import br.com.hapvida.medicalconsultation.dto.AnimalResponseDTO;
 import br.com.hapvida.medicalconsultation.dto.SpeciesResponseDTO;
@@ -18,11 +19,13 @@ public interface AnimalMapper {
 
     AnimalMapper INSTANCE = Mappers.getMapper(AnimalMapper.class);
 
-    abstract Animal from(AnimalRequestDTO data);
+    Animal from(AnimalRequestDTO data);
 
-    abstract AnimalResponseDTO from(Animal data);
+    AnimalResponseDTO from(Animal data);
 
-    abstract List<AnimalResponseDTO> from(List<Animal> data);
+    List<AnimalResponseDTO> from(List<Animal> data);
+
+    List<AllAnimalResponseDTO> toAll(List<Animal> data);
 
     default SpeciesEnum map(Integer value) {
         return SpeciesEnum.get(value);

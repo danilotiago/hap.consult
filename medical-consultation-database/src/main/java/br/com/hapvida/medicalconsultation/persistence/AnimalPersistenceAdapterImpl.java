@@ -3,6 +3,7 @@ package br.com.hapvida.medicalconsultation.persistence;
 import br.com.hapvida.medicalconsultation.domain.Animal;
 import br.com.hapvida.medicalconsultation.entity.AnimalEntity;
 import br.com.hapvida.medicalconsultation.mapper.AnimalEntityMapper;
+import br.com.hapvida.medicalconsultation.mapper.TutorEntityMapper;
 import br.com.hapvida.medicalconsultation.ports.persistence.AnimalPersistence;
 import br.com.hapvida.medicalconsultation.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ public class AnimalPersistenceAdapterImpl implements AnimalPersistence {
     public Animal get(Integer id) {
         Optional<AnimalEntity> result = this.repository.findByIdAndDeletedAtNull(id);
         if (result.isPresent()) {
-            return AnimalEntityMapper.INSTANCE.from(result.get());
+            Animal animal = AnimalEntityMapper.INSTANCE.from(result.get());
+            animal.setTutors(TutorEntityMapper.INSTANCE.from(result.get().getTutors()));
+            return animal;
         }
 
         throw new EntityNotFoundException("O animal de código " + id + " não foi encontrado");

@@ -1,5 +1,6 @@
 package br.com.hapvida.medicalconsultation.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,4 +16,8 @@ public class TutorRequestDTO {
     private String phone;
 
     private String email;
+
+    @NotNull(message = "O id do animal é obrigatório")
+    @JsonProperty("animal_id")
+    private Integer animalId;
 }

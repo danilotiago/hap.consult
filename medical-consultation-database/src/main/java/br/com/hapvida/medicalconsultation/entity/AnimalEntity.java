@@ -8,6 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,7 +32,7 @@ public class AnimalEntity {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "animal")
-    private List<TutorEntity> tutors;
+    private List<TutorEntity> tutors = new ArrayList<>();
 
     private Boolean isActive;
     private LocalDateTime createdAt;

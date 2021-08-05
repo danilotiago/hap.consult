@@ -1,6 +1,7 @@
 package br.com.hapvida.medicalconsultation.controller;
 
 import br.com.hapvida.medicalconsultation.domain.Animal;
+import br.com.hapvida.medicalconsultation.dto.AllAnimalResponseDTO;
 import br.com.hapvida.medicalconsultation.dto.AnimalRequestDTO;
 import br.com.hapvida.medicalconsultation.dto.AnimalResponseDTO;
 import br.com.hapvida.medicalconsultation.mapper.AnimalMapper;
@@ -23,18 +24,18 @@ public class AnimalController {
     private AnimalManagerUseCase animalManagerUseCase;
 
     @GetMapping
-    public ResponseEntity<List<AnimalResponseDTO>> listAll(
+    public ResponseEntity<List<AllAnimalResponseDTO>> listAll(
             @RequestParam(name = "only_deleted", required = false) Boolean onlyDeleted,
             @RequestParam(name = "with_deleted", required = false) Boolean withDeleted) {
 
-        List<AnimalResponseDTO> response = null;
+        List<AllAnimalResponseDTO> response = null;
 
         if (! isNull(onlyDeleted) && onlyDeleted == true) {
-            response = AnimalMapper.INSTANCE.from(this.animalManagerUseCase.listOnlyTrashed());
+            response = AnimalMapper.INSTANCE.toAll(this.animalManagerUseCase.listOnlyTrashed());
         } else if (! isNull(withDeleted) && withDeleted == true) {
-            response = AnimalMapper.INSTANCE.from(this.animalManagerUseCase.listWithTrashed());
+            response = AnimalMapper.INSTANCE.toAll(this.animalManagerUseCase.listWithTrashed());
         } else {
-            response = AnimalMapper.INSTANCE.from(this.animalManagerUseCase.list());
+            response = AnimalMapper.INSTANCE.toAll(this.animalManagerUseCase.list());
         }
 
         return ResponseEntity.ok(response);
