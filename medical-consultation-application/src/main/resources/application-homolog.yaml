@@ -1,0 +1,15 @@
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: none
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        show-sql: true
+    datasource:
+        url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/medical_consultation?createDatabaseIfNotExist=false&useTimezone=true&serverTimezone=America/Sao_Paulo
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+    servlet:
+        context-path: /medical-consultation
